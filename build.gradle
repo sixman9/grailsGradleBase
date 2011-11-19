@@ -27,6 +27,11 @@ repositories {
     mavenRepo url: "http://repository.jboss.org/maven2/"
 }
 
+//This might be wrong...
+configurations {
+	all*.exclude group: 'xml-apis',  module: 'xml-apis'
+}
+
 dependencies {
     compile "org.grails:grails-crud:$grailsVersion",
             "org.grails:grails-gorm:$grailsVersion"
