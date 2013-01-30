@@ -1,32 +1,31 @@
 version = 0.1
 
-grailsVersion = "1.3.7"
-
-apply plugin: 'idea'
-apply plugin: 'eclipse'
-
-
+//Define Java-based library repositories usable by the build script itself
 buildscript {
-    repositories {
-        mavenCentral()
-        mavenRepo name: "grails", url: 'http://repo.grails.org/grails/repo'
-        //mavenRepo url: "http://repository.jboss.org/maven2/"
-    }
-
-    dependencies {
-        //classpath "org.grails:grails-gradle-plugin:1.1-SNAPSHOT",
-        classpath "org.grails:grails-gradle-plugin:1.0",
-                  "org.grails:grails-bootstrap:1.3.7"
-    }
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'com.connorgarvey.gradle:gradle-grails-wrapper:1.0.1'
+  }
 }
 
-apply plugin: "grails"
-
+//Define Java-based library repositories usable by the project being built
 repositories {
     mavenCentral()
     mavenRepo url: "http://repository.jboss.org/maven2/"
 }
 
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'grails'
+
+grails {
+  version '2.2.0'
+}
+
+/*
+grailsVersion = 1.3.7
 //This might be wrong...
 configurations {
 	all*.exclude group: 'xml-apis',  module: 'xml-apis'
@@ -39,10 +38,11 @@ dependencies {
     runtime "org.slf4j:slf4j-log4j12:1.5.5", "hsqldb:hsqldb:1.8.0.5", 
             "net.sf.ehcache:ehcache:1.6.2", "jstl:jstl:1.1.2"
 }
+*/
 
 // if you want to use the gradle wrapper
 task('wrapper', type: Wrapper).configure {
-    gradleVersion = '1.0-milestone-6'
+    gradleVersion = '1.4'
 }
 
 def versionCompatibility = 1.6
